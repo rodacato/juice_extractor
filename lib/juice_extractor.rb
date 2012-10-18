@@ -9,14 +9,15 @@ module JuiceExtractor
     image_name
   end
 
-  def self.implicit_colors(site_url)
+  def self.implicit_colors(site_url, options={})
     image_path = screenshot(site_url)
     img = Magick::ImageList.new(image_path)
+    img = img.quantize(options[:quantize]) if options[:quantize]
     img.color_histogram.map{|pixel| pixel.first.to_color(Magick::AllCompliance, false, 8, true) }
   end
 
-  def self.explicit_colors(site_url)
+  def self.explicit_colors(site_url, attributes = ['background-color', 'border-color', 'color'])
     phantom_script = File.expand_path(File.dirname(__FILE__) + "/juice_extractor/js/styles.phantom.js")
-    `phantomjs #{phantom_script} #{site_url} #{ File.dirname(__FILE__) }`
+    `phantomjs #{phantom_script} #{site_url} #{ File.dirname(__FILE__) } #{options.to_json}`
   end
 end
