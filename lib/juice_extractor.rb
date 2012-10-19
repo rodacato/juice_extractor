@@ -13,7 +13,7 @@ module ColorExtractor
     image_path = Base.screenshot(site_url)
     img = Magick::ImageList.new(image_path)
     img = img.quantize(quantize) if quantize
-    img.color_histogram.map{|pixel| pixel.first.to_color(Magick::AllCompliance, false, 8, true) }.to_json
+    img.color_histogram.map{|pixel| pixel.first.to_color(Magick::AllCompliance, false, 8, true) }
   end
 
   def self.explicit_colors(site_url, attributes = ['background-color', "border-color", 'color'], quantize = nil)
@@ -21,7 +21,7 @@ module ColorExtractor
     phantom_script = File.expand_path(File.dirname(__FILE__) + "/juice_extractor/js/styles.phantom.js")
     val = `phantomjs #{phantom_script} #{site_url} #{ File.dirname(__FILE__) } '#{attributes.to_json}'`
     colors= Base.build_explicit_colors(val, attributes, quantize)
-    colors.to_json
+    colors
   end
 
   module Base
