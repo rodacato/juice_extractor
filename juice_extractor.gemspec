@@ -19,4 +19,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'json'
   
   gem.add_development_dependency 'ruby-debug'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'mocha'
 end
