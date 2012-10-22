@@ -47,7 +47,8 @@ module ColorExtractor
       image_name = "#{path}/#{rand(36**10).to_s(36)}.png"
       phantom_script = File.expand_path(File.dirname(__FILE__) + "/../js/screenshot.phantom.js")
       puts "Running command: phantomjs --load-images=no #{phantom_script} #{site_url} #{image_name} "
-      `phantomjs --load-images=no #{phantom_script} #{site_url} #{image_name}`
+      res = `phantomjs --load-images=no #{phantom_script} #{site_url} #{image_name}`
+      /.*.png/.match(res).to_s
     end
 
   end
