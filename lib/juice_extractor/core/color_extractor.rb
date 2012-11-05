@@ -1,6 +1,6 @@
 module ColorExtractor
   def self.implicit_colors(site_url, quantize = nil)
-    return [] if site_url.nil?
+    return [] if site_url.nil? || site_url.empty?
     image_path = Base.screenshot(site_url)
     img = Magick::ImageList.new(image_path)
     img = img.quantize(quantize) if quantize
