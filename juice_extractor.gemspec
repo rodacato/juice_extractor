@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rmagick', "2.12.0"
   gem.add_dependency 'json'
 
-  gem.add_development_dependency 'ruby-debug'
+  gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'mocha'
   gem.add_development_dependency 'hanoi'
